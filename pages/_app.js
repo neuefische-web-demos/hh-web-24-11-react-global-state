@@ -48,15 +48,25 @@ export default function App({ Component, pageProps }) {
     );
   }
 
+  const animalCounts = animals.map((animal) => animal.count);
+  const countSum = animalCounts.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+  const countAverage = countSum / animals.length;
+  const dragonCount = animals.find((animal) => animal.name === "Dragons").count;
+
   return (
     <>
       <GlobalStyle />
-      <Layout>
+      <Layout countSum={countSum} dragonCount={dragonCount}>
         <Component
           {...pageProps}
           animals={animals}
           handleAdd={handleAdd}
           handleSubtract={handleSubtract}
+          countSum={countSum}
+          countAverage={countAverage}
+          dragonCount={dragonCount}
         />
       </Layout>
     </>
